@@ -26,7 +26,7 @@ export default function RootLayout() {
           <Outlet />
         </main>
         <footer className="border-t p-4 text-center text-xs text-muted-foreground">
-          Chawis Jirathitikul และรหัสนักศึกษา 680610666
+         จัดทำโดย Chawis Jirathitikul และรหัสนักศึกษา 680610666
         </footer>
       </SidebarInset>
     </SidebarProvider>
