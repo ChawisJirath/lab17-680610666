@@ -55,7 +55,7 @@ export const courseFormSchema = z.object({
       COURSE_DESCRIPTION_MAX,
       `รายละเอียดมีได้ไม่เกิน ${COURSE_DESCRIPTION_MAX} ตัวอักษร`,
     ),
-  newsletter: z.boolean(),
+  notifyByEmail: z.boolean(),
 });
 
 export type CourseFormValues = z.infer<typeof courseFormSchema>;

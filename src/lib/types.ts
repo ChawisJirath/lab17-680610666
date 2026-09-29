@@ -17,12 +17,11 @@ export type { StudentEmail };
 interface Course {
   courseId: string;
   courseTitle: string;
-  instructors: string[];
-  instructorDetails?: CourseInstructor[];
-  program?: "CPE" | "ISNE";
-  semester?: "1" | "2" | "summer";
-  description?: string;
-  newsletter?: boolean;
+  instructors: CourseInstructor[];
+  program: "CPE" | "ISNE";
+  semester: "1" | "2" | "summer";
+  description: string;
+  notifyByEmail: boolean;
 }
 export type { Course };
 

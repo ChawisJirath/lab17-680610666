@@ -87,19 +87,13 @@ export function CourseTable() {
                   <span className="text-muted-foreground">ยังไม่มีผู้สอน</span>
                 ) : (
                   <div className="space-y-[1px]">
-                    {course.instructors.map((name, index) => {
-                      const email = course.instructorDetails?.find(
-                        (instructor) => instructor.name === name,
-                      )?.email;
-
+                    {course.instructors.map((instructor, index) => {
                       return (
-                        <div key={`${name}-${index}`}>
-                          <div>{name}</div>
-                          {email && (
-                            <div className="text-xs leading-tight text-muted-foreground">
-                              {email}
-                            </div>
-                          )}
+                        <div key={`${instructor.email}-${index}`}>
+                          <div>{instructor.name}</div>
+                          <div className="text-xs leading-tight text-muted-foreground">
+                            {instructor.email}
+                          </div>
                         </div>
                       );
                     })}
@@ -107,20 +101,16 @@ export function CourseTable() {
                 )}
               </TableCell>
               <TableCell className="text-center">
-                {course.newsletter === undefined ? (
-                  <span className="text-muted-foreground">—</span>
-                ) : (
-                  <Badge
-                    variant="secondary"
-                    className={
-                      course.newsletter
-                        ? "h-5 bg-foreground text-background hover:bg-foreground/90"
-                        : "h-5"
-                    }
-                  >
-                    {course.newsletter ? "รับ" : "ไม่รับ"}
-                  </Badge>
-                )}
+                <Badge
+                  variant="secondary"
+                  className={
+                    course.notifyByEmail
+                      ? "h-5 bg-foreground text-background hover:bg-foreground/90"
+                      : "h-5"
+                  }
+                >
+                  {course.notifyByEmail ? "รับ" : "ไม่รับ"}
+                </Badge>
               </TableCell>
               <TableCell className="text-center">
                 <ConfirmDeleteButton

@@ -66,7 +66,7 @@ const emptyCourseForm: DefaultValues<CourseFormValues> = {
   program: undefined,
   semester: undefined,
   description: "",
-  newsletter: false,
+  notifyByEmail: false,
 };
 
 export function AddNewCourseDialog() {
@@ -97,12 +97,11 @@ export function AddNewCourseDialog() {
     addCourse({
       courseId: values.courseId,
       courseTitle: values.courseTitle,
-      instructors: values.instructors.map((instructor) => instructor.name),
-      instructorDetails: values.instructors,
+      instructors: values.instructors,
       program: values.program,
       semester: values.semester,
       description: values.description,
-      newsletter: values.newsletter,
+      notifyByEmail: values.notifyByEmail,
     });
     resetForm();
     setOpen(false);
@@ -371,7 +370,7 @@ export function AddNewCourseDialog() {
             </FieldSet>
 
             <Controller
-              name="newsletter"
+              name="notifyByEmail"
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field
@@ -380,7 +379,7 @@ export function AddNewCourseDialog() {
                   data-invalid={fieldState.invalid}
                 >
                   <FieldContent>
-                    <FieldLabel htmlFor="newsletter" className="font-normal">
+                    <FieldLabel htmlFor="notifyByEmail" className="font-normal">
                       รับข่าวสารทางอีเมล
                     </FieldLabel>
                     <FieldDescription>
@@ -388,7 +387,7 @@ export function AddNewCourseDialog() {
                     </FieldDescription>
                   </FieldContent>
                   <Switch
-                    id="newsletter"
+                    id="notifyByEmail"
                     name={field.name}
                     checked={field.value}
                     onCheckedChange={field.onChange}
