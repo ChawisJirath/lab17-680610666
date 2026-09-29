@@ -62,5 +62,12 @@ export const useEnrollmentStore = create<EnrollmentStore>()(
         })),
     }),
     // เก็บเฉพาะ students/courses ลง localStorage — enrollments ไม่ persist
+    {
+      name: "enrollment-store",
+      partialize: (state) => ({
+        students: state.students,
+        courses: state.courses,
+      }),
+    },
   ),
 );

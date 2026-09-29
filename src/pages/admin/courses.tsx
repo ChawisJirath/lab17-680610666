@@ -6,7 +6,7 @@ export default function AdminCoursesPage() {
   const courseCount = useEnrollmentStore((s) => s.courses.length);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <h1 className="text-xl font-semibold">จัดการวิชาเรียน</h1>

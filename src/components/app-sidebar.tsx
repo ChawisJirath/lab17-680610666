@@ -18,8 +18,8 @@ import {
 } from "@/components/ui/sidebar";
 
 // ผู้ใช้ตัวอย่างฝั่ง Lecture: ผู้ดูแลระบบ (ADMIN)
-const NICKNAME = "Admin";
-const ROLE = "ADMIN";
+const NICKNAME = "Wia";
+const ROLE = "STUDENT";
 
 const items = [
   { title: "หน้าแรก", url: "/", icon: Home },
@@ -60,7 +60,7 @@ export function AppSidebar() {
         <Separator className="mb-2" />
         <div className="flex items-center gap-3 px-2 py-1.5">
           <Avatar>
-            <AvatarImage src="/profile.svg" alt={NICKNAME} />
+            <AvatarImage src="/cafeatlampang.jpg" alt={NICKNAME} />
             <AvatarFallback>{NICKNAME.slice(0, 2)}</AvatarFallback>
           </Avatar>
           <div className="flex min-w-0 flex-col">

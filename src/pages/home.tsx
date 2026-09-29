@@ -24,6 +24,7 @@ export default function HomePage() {
           </div>
         </CardContent>
       </Card>
+      <p className="text-center text-xs text-muted-foreground">จัดทำโดย Chawis Jirathitikul รหัสนักศึกษา 680610666</p>
     </div>
   );
 }

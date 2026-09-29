@@ -18,8 +18,19 @@ interface Course {
   courseId: string;
   courseTitle: string;
   instructors: string[];
+  instructorDetails?: CourseInstructor[];
+  program?: "CPE" | "ISNE";
+  semester?: "1" | "2" | "summer";
+  description?: string;
+  newsletter?: boolean;
 }
 export type { Course };
+
+interface CourseInstructor {
+  name: string;
+  email: string;
+}
+export type { CourseInstructor };
 
 interface Enrollment {
   studentId: string;

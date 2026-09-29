@@ -37,16 +37,38 @@ export const courses: Course[] = [
     courseId: "261207",
     courseTitle: "Basic Computer Engineering Lab",
     instructors: ["Dome", "Chanadda"],
+    instructorDetails: [
+      { name: "Dome", email: "dome@cmu.ac.th" },
+      { name: "Chanadda", email: "chanadda@cmu.ac.th" },
+    ],
+    program: "CPE",
+    semester: "1",
+    description: "ปฏิบัติการพื้นฐานวิศวกรรมคอมพิวเตอร์",
+    newsletter: true,
   },
   {
     courseId: "261497",
     courseTitle: "Full Stack Development",
     instructors: ["Dome", "Nirand", "Chanadda"],
+    instructorDetails: [
+      { name: "Dome", email: "dome@cmu.ac.th" },
+      { name: "Nirand", email: "nirand@cmu.ac.th" },
+      { name: "Chanadda", email: "chanadda@cmu.ac.th" },
+    ],
+    program: "CPE",
+    semester: "2",
+    newsletter: false,
   },
   {
     courseId: "269101",
     courseTitle: "Introduction to Information Systems and Network Engineering",
     instructors: ["KENNETH COSH"],
+    instructorDetails: [
+      { name: "KENNETH COSH", email: "kenneth.cosh@cmu.ac.th" },
+    ],
+    program: "ISNE",
+    semester: "1",
+    newsletter: false,
   },
 ];
 

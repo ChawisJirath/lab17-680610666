@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge";
 import { ConfirmDeleteButton } from "@/components/confirm-button";
 import {
   Table,
@@ -8,6 +9,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useEnrollmentStore } from "@/lib/enrollment-store";
+import type { Course } from "@/lib/types";
+
+const semesterLabels: Record<NonNullable<Course["semester"]>, string> = {
+  "1": "ภาคการศึกษาที่ 1",
+  "2": "ภาคการศึกษาที่ 2",
+  summer: "ภาคฤดูร้อน",
+};
 
 export function CourseTable() {
   const courses = useEnrollmentStore((s) => s.courses);
@@ -15,20 +23,34 @@ export function CourseTable() {
 
   return (
     <div className="rounded-lg border">
-      <Table>
+      <Table className="min-w-[1100px] table-fixed text-sm">
+        <colgroup>
+          <col className="w-[5%]" />
+          <col className="w-[34%]" />
+          <col className="w-[5%]" />
+          <col className="w-[10%]" />
+          <col className="w-[18%]" />
+          <col className="w-[13%]" />
+          <col className="w-[10%]" />
+          <col className="w-[5%]" />
+        </colgroup>
         <TableHeader>
           <TableRow>
             <TableHead>รหัสวิชา</TableHead>
             <TableHead>ชื่อวิชา</TableHead>
+            <TableHead className="text-center">หลักสูตร</TableHead>
+            <TableHead className="text-center">ภาคการศึกษา</TableHead>
+            <TableHead>รายละเอียด</TableHead>
             <TableHead>ผู้สอน</TableHead>
-            <TableHead className="w-20">Action</TableHead>
+            <TableHead className="text-center">รับข่าวสารทางอีเมล</TableHead>
+            <TableHead className="w-16 text-center">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {courses.length === 0 && (
             <TableRow>
               <TableCell
-                colSpan={4}
+                colSpan={8}
                 className="h-20 text-center text-muted-foreground"
               >
                 ยังไม่มีวิชาที่เปิดสอน
@@ -37,17 +59,70 @@ export function CourseTable() {
           )}
           {courses.map((course) => (
             <TableRow key={course.courseId}>
-              <TableCell>{course.courseId}</TableCell>
-              <TableCell>{course.courseTitle}</TableCell>
-              <TableCell>
-                {/* แสดงรายชื่อผู้สอนเป็นข้อความธรรมดา คั่นด้วย ", " */}
+              <TableCell className="font-medium">{course.courseId}</TableCell>
+              <TableCell className="font-medium">
+                {course.courseTitle}
+              </TableCell>
+              <TableCell className="text-center">
+                {course.program ? (
+                  <Badge variant="outline">{course.program}</Badge>
+                ) : (
+                  <span className="text-muted-foreground">—</span>
+                )}
+              </TableCell>
+              <TableCell className="text-center">
+                {course.semester ? (
+                  semesterLabels[course.semester]
+                ) : (
+                  <span className="text-muted-foreground">—</span>
+                )}
+              </TableCell>
+              <TableCell className="whitespace-normal text-muted-foreground">
+                {course.description || (
+                  <span className="text-muted-foreground">—</span>
+                )}
+              </TableCell>
+              <TableCell className="whitespace-normal">
                 {course.instructors.length === 0 ? (
                   <span className="text-muted-foreground">ยังไม่มีผู้สอน</span>
                 ) : (
-                  course.instructors.join(", ")
+                  <div className="space-y-[1px]">
+                    {course.instructors.map((name, index) => {
+                      const email = course.instructorDetails?.find(
+                        (instructor) => instructor.name === name,
+                      )?.email;
+
+                      return (
+                        <div key={`${name}-${index}`}>
+                          <div>{name}</div>
+                          {email && (
+                            <div className="text-xs leading-tight text-muted-foreground">
+                              {email}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
                 )}
               </TableCell>
-              <TableCell>
+              <TableCell className="text-center">
+                {course.newsletter === undefined ? (
+                  <span className="text-muted-foreground">—</span>
+                ) : (
+                  <Badge
+                    variant="secondary"
+                    className={
+                      course.newsletter
+                        ? "h-5 bg-foreground text-background hover:bg-foreground/90"
+                        : "h-5"
+                    }
+                  >
+                    {course.newsletter ? "รับ" : "ไม่รับ"}
+                  </Badge>
+                )}
+              </TableCell>
+              <TableCell className="text-center">
                 <ConfirmDeleteButton
                   label={`ลบวิชา ${course.courseId}`}
                   title="ลบวิชา?"
