@@ -287,7 +287,7 @@ export function AddNewCourseDialog() {
             <FieldSet data-invalid={!!instructorsError?.message}>
               <FieldLegend variant="label">ผู้สอน</FieldLegend>
               <FieldDescription>
-                {fields.length}/{MAX_INSTRUCTORS} คน — ใช้อีเมล @cmu.ac.th
+                {fields.length}/{MAX_INSTRUCTORS} คน — กรอกชื่อผู้สอน และอีเมล name@cmu.ac.th (ห้ามซ้ำกัน)
               </FieldDescription>
               <FieldGroup className="gap-3">
                 {fields.map((item, index) => (
@@ -295,7 +295,7 @@ export function AddNewCourseDialog() {
                     key={item.id}
                     className="grid grid-cols-[auto_minmax(0,1fr)_minmax(0,1fr)_auto] items-start gap-3"
                   >
-                    <span className="mt-8 w-5 text-sm text-muted-foreground">
+                    <span className="flex h-9 w-5 items-center text-sm text-muted-foreground">
                       {index + 1}.
                     </span>
                     <Controller
@@ -303,13 +303,12 @@ export function AddNewCourseDialog() {
                       control={form.control}
                       render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
-                          <FieldLabel htmlFor={`instructor-name-${index}`}>
-                            ชื่อผู้สอน {index + 1}
+                          <FieldLabel htmlFor={`instructor-name-${index}`} className="sr-only">
                           </FieldLabel>
                           <Input
                             {...field}
                             id={`instructor-name-${index}`}
-                            placeholder="กรอกชื่อผู้สอน"
+                            placeholder="ชื่อผู้สอน"
                             aria-invalid={fieldState.invalid}
                           />
                           {fieldState.invalid && (
@@ -323,14 +322,13 @@ export function AddNewCourseDialog() {
                       control={form.control}
                       render={({ field, fieldState }) => (
                         <Field data-invalid={fieldState.invalid}>
-                          <FieldLabel htmlFor={`instructor-email-${index}`}>
-                            อีเมล
+                          <FieldLabel htmlFor={`instructor-email-${index}`} className="sr-only">
                           </FieldLabel>
                           <Input
                             {...field}
                             id={`instructor-email-${index}`}
                             type="email"
-                            placeholder="ต้องเป็นอีเมล @cmu.ac.th"
+                            placeholder="name@cmu.ac.th"
                             aria-invalid={fieldState.invalid}
                           />
                           {fieldState.invalid && (
@@ -343,7 +341,6 @@ export function AddNewCourseDialog() {
                       type="button"
                       variant="ghost"
                       size="icon"
-                      className="mt-6"
                       aria-label={`ลบผู้สอนคนที่ ${index + 1}`}
                       disabled={fields.length <= 1}
                       onClick={() => remove(index)}

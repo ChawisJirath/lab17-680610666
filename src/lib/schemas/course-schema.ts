@@ -29,7 +29,7 @@ export const courseFormSchema = z.object({
           .trim()
           .email("อีเมลไม่ถูกต้อง")
           .refine((email) => email.toLowerCase().endsWith("@cmu.ac.th"), {
-            message: "ใช้อีเมล @cmu.ac.th",
+            message: "ต้องเป็นอีเมล @cmu.ac.th",
           }),
       }),
     )
@@ -53,7 +53,7 @@ export const courseFormSchema = z.object({
     .trim()
     .max(
       COURSE_DESCRIPTION_MAX,
-      `รายละเอียดมีได้ไม่เกิน ${COURSE_DESCRIPTION_MAX} ตัวอักษร`,
+      `รายละเอียดยาวได้ไม่เกิน ${COURSE_DESCRIPTION_MAX} ตัวอักษร`,
     ),
   notifyByEmail: z.boolean(),
 });
