@@ -12,7 +12,7 @@ export default function HomePage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-sm text-muted-foreground">
-            Lecture 17: รับข้อมูลและตรวจสอบก่อนเข้าสู่ระบบ
+            Lab 17: รับข้อมูลและตรวจสอบก่อนเข้าสู่ระบบ
           </p>
           <div className="flex flex-wrap gap-2">
             <Button render={<Link to="/admin/students" />}>
